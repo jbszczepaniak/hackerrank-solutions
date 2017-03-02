@@ -2,16 +2,19 @@ from jumping_on_the_clouds import min_jumps
 import unittest
 
 class TestJumpingOnTheClouds(unittest.TestCase):
-    def test_shortest_possibility(self):
-        clouds = [0, 1, 0]
-        self.assertEqual(min_jumps(clouds), 1)
+    cloud_sets = [
+        ([0, 1, 0], 1),
+        ([0,1,0,0], 2),
+        ([0,0,1,0], 2),
+        ([0,0,0,0], 2),
+        ([0,0,0,0,0], 2),
+        ([0,0,1,0,0,1,0], 4),
+        ([0,0,0,0,1,0], 3)
+      ]
 
-    def test_4_clouds(self):
-        clouds = [0,1,0,0]
-        self.assertEqual(min_jumps(clouds), 2)
-        clouds = [0,0,1,0]
-        self.assertEqual(min_jumps(clouds), 2)
-
+    def test_all_cloud_sets(self):
+        for clouds, jumps in self.cloud_sets:
+          self.assertEqual(min_jumps(clouds), jumps, "{} of jumps is not correct for {}".format(jumps, clouds))
 
 if __name__ == '__main__':
     unittest.main()
